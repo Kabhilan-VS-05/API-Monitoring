@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced API Monitor</title>
+    <link rel="stylesheet" href="/static_advanced/monitor.css">
+</head>
+<body>
+    <div class="container">
+        <div id="mainView">
+            <header class="main-header">
+                <h1>API Status</h1>
+                <div class="header-actions">
+                    <a href="/" class="button-secondary">Live API Check</a>
+                    <button id="addApiBtn" class="button-primary">Add New API</button>
+                </div>
+            </header>
+            <div id="monitorList" class="monitor-list-container">
+                <p class="placeholder">Loading monitors...</p>
+            </div>
+        </div>
+
+        <div id="detailsView" class="hidden">
+            </div>
+    </div>
+
+    <div id="addApiModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2 id="modalTitle">Add New API to Monitor</h2>
+            <form id="addApiForm">
+                <input type="hidden" id="apiEditId">
+                <input type="url" id="apiUrl" placeholder="https://api.example.com/v1/status" required>
+                <input type="text" id="apiCategory" placeholder="Category (e.g., Payment APIs)">
+                <input type="text" id="apiHeaderName" placeholder="Header Name (Optional)">
+                <input type="text" id="apiHeaderValue" placeholder="Header Value (Optional)">
+                <input type="email" id="apiEmail" placeholder="Notification Email (Optional)">
+                <select id="apiFrequency" required>
+                    <option value="" disabled selected>Select Check Frequency</option>
+                    <option value="1">High (1 minute)</option>
+                    <option value="4">Fast (4 minutes)</option>
+                    <option value="10">Medium (10 minutes)</option>
+                    <option value="30">Low (30 minutes)</option>
+                </select>
+                <div class="modal-actions">
+                    <button type="button" id="cancelBtn" class="button-secondary">Cancel</button>
+                    <button type="submit" id="modalSubmitBtn" class="button-primary">Add Monitor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="reportModal" class="modal-overlay hidden">
+        <div class="modal-content" id="reportModalContent"></div>
+    </div>
+    <div id="tooltip" class="tooltip hidden"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static_advanced/monitor.js"></script>
+</body>
+</html>

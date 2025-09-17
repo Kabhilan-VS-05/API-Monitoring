@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live API Check</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="dashboard-grid">
+      <header class="panel panel-header">
+        <div class="header-top">
+            <h1>Live API Check</h1>
+            <button id="reportButton" class="button-secondary" onclick="generateReport()" style="display: none;">
+                Generate Report
+                <span id="reportBadge" class="badge"></span>
+            </button>
+        </div>
+        <section class="input-section">
+          <div class="input-group">
+            <input type="text" id="urlInput" placeholder="https://api.example.com" />
+          </div>
+          <div class="headers-group">
+            <input type="text" id="headerNameInput" placeholder="Header Name (e.g., Authorization)" />
+            <input type="text" id="headerValueInput" placeholder="Header Value (e.g., Bearer your_token)" />
+          </div>
+          <div class="input-group button-group">
+            <button id="checkButton" onclick="checkLatency()">
+              <span class="button-text">Check API</span>
+            </button>
+            <a href="/advanced_monitor" class="button-secondary">
+              Advanced Monitor
+            </a>
+          </div>
+        </section>
+      </header>
+      <aside class="panel panel-urls">
+        <h2>Monitored URLs</h2>
+        <div id="urls-list" class="urls-list">
+          <p class="placeholder">No URLs monitored yet.</p>
+        </div>
+        <div id="urls-pagination" class="pagination-controls"></div>
+      </aside>
+      <main class="panel panel-main">
+        <div id="result-container">
+          <div id="result" class="result-box">
+            <p class="placeholder">Check an API to see results and performance chart...</p>
+          </div>
+        </div>
+        <div class="chart-container">
+            <canvas id="latencyChart"></canvas>
+        </div>
+      </main>
+      <footer class="panel panel-logs">
+        <h2>API Check Logs</h2>
+        <div id="logs" class="logs-box">
+          <p class="placeholder">No logs yet.</p>
+        </div>
+        <div id="logs-pagination" class="pagination-controls"></div>
+      </footer>
+    </div>
+    <script src="/static/script.js"></script>
+  </body>
+</html>
