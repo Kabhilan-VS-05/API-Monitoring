@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexGen API Monitor | Enterprise Intelligence Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="/static_advanced/premium.css">
+</head>
+
+<body data-theme="dark">
+
+    <div class="container">
+        <div id="mainView">
+            <header class="main-header">
+                <div class="logo-group">
+                    <i class="ri-pulse-fill logo-icon"></i>
+                    <h1>NEXGEN <span class="logo-thin">MONITOR</span></h1>
+                </div>
+                <div class="header-actions">
+                    <div class="button-group">
+                        <a href="/" class="button-secondary" title="Live API Check"><i class="ri-broadcast-line"></i>
+                            <span>Live Check</span></a>
+                        <button id="communityPanelBtn" class="button-secondary" title="Community Communication"><i
+                                class="ri-megaphone-line"></i> <span>Community</span></button>
+                        <button id="settingsBtn" class="button-secondary" title="Settings"><i
+                                class="ri-settings-3-line"></i> <span>Settings</span></button>
+                        <a id="authBtn" href="/auth" class="button-secondary"><i class="ri-shield-user-line"></i>
+                            <span>Sign In</span></a>
+                    </div>
+                    <button id="themeToggleBtn" class="button-icon" title="Toggle Theme"></button>
+                    <button id="addApiBtn" class="button-primary"><i class="ri-add-line"></i> Add Monitor</button>
+                </div>
+
+                <div id="communityPanel" class="community-panel hidden">
+                    <div class="panel-header">
+                        <div>
+                            <h2><i class="ri-megaphone-line" aria-hidden="true"></i> Community Communication</h2>
+                            <p>Manage contacts, languages, notifications, and activity logs for rural field workers.</p>
+                        </div>
+                        <button id="closeCommunityPanel" class="button-icon" type="button"
+                            title="Close Community Communication panel"
+                            aria-label="Close Community Communication panel"><i class="ri-close-line"
+                                aria-hidden="true"></i></button>
+                    </div>
+                    <div class="panel-content">
+                        <section class="panel-section">
+                            <div class="section-header">
+                                <h3>Contact Groups</h3>
+                                <button id="addContactBtn" class="button-secondary">Add Contact</button>
+                            </div>
+                            <form id="contactForm" class="contact-form">
+                                <input type="text" id="contactName" placeholder="Name" required>
+                                <input type="tel" id="contactPhone" placeholder="Phone" required>
+                                <select id="contactChannel" required>
+                                    <option value="WhatsApp">WhatsApp</option>
+                                    <option value="SMS">SMS</option>
+                                    <option value="IVR">IVR</option>
+                                </select>
+                                <select id="contactLanguage">
+                                    <option value="EN">English</option>
+                                    <option value="TA">Tamil</option>
+                                    <option value="HI">Hindi</option>
+                                </select>
+                                <input type="text" id="contactGroups" placeholder="Subscribed APIs (comma separated)">
+                                <button type="submit" class="button-primary">Save Contact</button>
+                            </form>
+                            <div class="contact-table-wrapper">
+                                <table class="contact-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Phone</th>
+                                            <th>Channel</th>
+                                            <th>Language</th>
+                                            <th>APIs</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="contactTableBody"></tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section class="panel-section">
+                            <h3>Language Settings</h3>
+                            <div class="language-options">
+                                <label><input type="radio" name="preferredLanguage" value="EN"> English</label>
+                                <label><input type="radio" name="preferredLanguage" value="TA"> Tamil</label>
+                                <label><input type="radio" name="preferredLanguage" value="HI"> Hindi</label>
+                            </div>
+                            <div class="translation-tool">
+                                <h4>Translate Sample Message</h4>
+                                <textarea id="translateMessage" rows="3" placeholder="Enter alert text..."></textarea>
+                                <div class="translation-actions">
+                                    <button data-lang="EN" class="button-secondary translation-btn">English</button>
+                                    <button data-lang="TA" class="button-secondary translation-btn">தமிழ்</button>
+                                    <button data-lang="HI" class="button-secondary translation-btn">हिंदी</button>
+                                    <button id="translateClear" class="button-icon" type="button"
+                                        title="Clear translation output" aria-label="Clear translation output"><i
+                                            class="ri-refresh-line" aria-hidden="true"></i></button>
+                                </div>
+                                <div class="translation-output" id="translationOutput">Translation will appear here.
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="panel-section grid-2col">
+                            <div>
+                                <h3>Notification Preferences</h3>
+                                <div class="preferences">
+                                    <label><input type="checkbox" id="prefWhatsApp" checked> WhatsApp Alerts</label>
+                                    <label><input type="checkbox" id="prefSMS" checked> SMS Alerts</label>
+                                    <label><input type="checkbox" id="prefIVR" checked> IVR Calls</label>
+                                </div>
+                                <div class="preferences">
+                                    <label><input type="checkbox" id="prefDowntime" checked> Downtime Alerts</label>
+                                    <label><input type="checkbox" id="prefAIPredict" checked> AI Prediction
+                                        Alerts</label>
+                                    <label><input type="checkbox" id="prefRecovery" checked> Recovery Alerts</label>
+                                </div>
+                            </div>
+                            <div class="test-alert">
+                                <h3>Test Alert Delivery</h3>
+                                <label for="testAlertApi" class="sr-only">Select API to send a test alert</label>
+                                <select id="testAlertApi" aria-label="Select API for test alert"></select>
+                                <select id="testAlertChannel">
+                                    <option value="whatsapp">WhatsApp</option>
+                                    <option value="sms">SMS</option>
+                                    <option value="ivr">IVR</option>
+                                </select>
+                                <textarea id="testAlertMessage" rows="2" placeholder="Custom test message"></textarea>
+                                <button id="sendTestAlert" class="button-primary">Send Test Alert</button>
+                                <div id="testAlertStatus" class="notification-status"></div>
+                            </div>
+                        </section>
+
+                        <section class="panel-section">
+                            <h3>Community Notification Activity</h3>
+                            <div id="notificationTimeline" class="timeline"></div>
+                            <button id="refreshTimeline" class="button-secondary">Refresh Timeline</button>
+                        </section>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Developer Data Integration Panel -->
+            <div id="devDataPanel" class="dev-data-panel hidden">
+                <div class="panel-header">
+                    <h2><i class="ri-links-line"></i> Developer Data Integration</h2>
+                    <button id="closeDevPanel" class="button-icon"><i class="ri-close-line"></i></button>
+                </div>
+                <div class="panel-content">
+                    <div class="panel-section">
+                        <h3><i class="ri-github-fill"></i> GitHub Sync</h3>
+                        <div class="sync-form">
+                            <input type="text" id="repoOwner" placeholder="Repository Owner (e.g., username)">
+                            <input type="text" id="repoName" placeholder="Repository Name (e.g., my-repo)">
+                            <input type="password" id="githubToken"
+                                placeholder="GitHub Personal Access Token (optional)">
+                            <small>
+                                <i class="ri-lightbulb-line"></i> <a href="#" id="tokenHelpLink">How to get GitHub
+                                    token?</a>
+                            </small>
+                            <input type="number" id="sinceDays" placeholder="Days to fetch" value="90" min="1"
+                                max="365">
+                            <button id="syncGithubBtn" class="button-primary"><i class="ri-refresh-line"></i> Sync
+                                GitHub Data</button>
+                            <button id="exportDatasetBtn" class="button-secondary"><i class="ri-upload-line"></i> Export
+                                Dataset to GitHub</button>
+                        </div>
+                        <div id="syncStatus" class="sync-status"></div>
+                        <div id="exportStatus" class="sync-status"></div>
+                    </div>
+
+                    <div class="panel-section">
+
+                        <h3><i class="ri-brain-line"></i> Automatic Alert Systems</h3>
+                        <div class="alert-system-container">
+                            <div class="alert-system-item">
+                                <strong class="alert-system-title">System 1: Immediate Downtime/Recovery</strong>
+                                <p class="alert-system-desc">
+                                    <i class="ri-checkbox-circle-line"></i> Automatically alerts when API goes down<br>
+                                    <i class="ri-checkbox-circle-line"></i> Automatically alerts when API recovers<br>
+                                    <i class="ri-checkbox-circle-line"></i> Creates GitHub issues with full details
+                                </p>
+                            </div>
+                            <div class="alert-system-item">
+                                <strong class="alert-system-title">System 2: AI Predictive (Every 20 mins)</strong>
+                                <p class="alert-system-desc">
+                                    <i class="ri-brain-line"></i> Trains AI model every 20 minutes<br>
+                                    <i class="ri-brain-line"></i> Predicts failure probability<br>
+                                    <i class="ri-brain-line"></i> Alerts if >70% failure risk detected
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-section">
+                        <h3><i class="ri-bar-chart-line"></i> Data Summary</h3>
+                        <div class="data-summary">
+                            <div class="summary-card">
+                                <span class="summary-label">Commits</span>
+                                <span id="commitCount" class="summary-value">-</span>
+                            </div>
+                            <div class="summary-card">
+                                <span class="summary-label">Issues</span>
+                                <span id="issueCount" class="summary-value">-</span>
+                            </div>
+                            <div class="summary-card">
+                                <span class="summary-label">Incidents</span>
+                                <span id="incidentCount" class="summary-value">-</span>
+                            </div>
+                            <div class="summary-card">
+                                <span class="summary-label">Error Logs</span>
+                                <span id="logCount" class="summary-value">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-section">
+                        <h3><i class="ri-git-commit-line"></i> Recent Commits</h3>
+                        <div id="commitsList" class="data-list">
+                            <p class="placeholder">No commits synced yet.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="sync-section">
+                        <h3>🐛 Open Issues</h3>
+                        <div id="issuesList" class="data-list">
+                            <p class="no-data">No issues synced yet.</p>
+                        </div>
+                    </div>
+
+                    <div class="sync-section">
+                        <h3>🚨 Recent Incidents</h3>
+                        <div id="incidentsList" class="data-list">
+                            <p class="no-data">No incidents created yet.</p>
+                        </div>
+                    </div>
+
+                    <div class="sync-section">
+                        <h3>🚨 Create Incident Report</h3>
+                        <div class="incident-form">
+                            <input type="text" id="incidentTitle" placeholder="Incident Title">
+                            <textarea id="incidentSummary" placeholder="Summary" rows="3"></textarea>
+                            <select id="incidentSeverity">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                                <option value="critical">Critical</option>
+                            </select>
+                            <input type="text" id="incidentRootCause" placeholder="Root Cause">
+                            <input type="text" id="incidentFix" placeholder="Fix Applied">
+                            <button id="createIncidentBtn" class="button-primary">Create Incident</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section id="developerOverview" class="dev-overview-container hidden">
+                <div class="dev-overview-card">
+                    <div class="dev-overview-header">
+                        <h3><i class="ri-github-line"></i> Synced Repository Summary</h3>
+                        <span id="repoSlug" class="repo-slug">repo/slug</span>
+                    </div>
+                    <div class="dev-stats-inline">
+                        <div class="dev-stat">
+                            <i class="ri-git-commit-line"></i> <span id="overviewCommits">0</span> Commits
+                        </div>
+                        <div class="dev-stat">
+                            <i class="ri-issue-line"></i> <span id="overviewIssues">0</span> Issues
+                        </div>
+                        <div class="dev-stat">
+                            <i class="ri-alert-line"></i> <span id="overviewLog">0</span> Logs
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sloSummary" class="slo-summary">
+                <div class="summary-tile"><i class="ri-radar-line"></i><small>Total Monitors</small><strong
+                        id="sloTotalMonitors">-</strong></div>
+                <div class="summary-tile"><i class="ri-heart-pulse-line"></i><small>Avg Uptime (24h)</small><strong
+                        id="sloAvgUptime">-</strong></div>
+                <div class="summary-tile"><i class="ri-pie-chart-line"></i><small>Error Budget Left</small><strong
+                        id="sloAvgBudget">-</strong></div>
+                <div class="summary-tile"><i class="ri-fire-line"></i><small>Burn Alerts</small><strong
+                        id="sloBurnAlerts">-</strong></div>
+            </section>
+
+            <div id="monitorList" class="monitor-grid-container">
+                <p class="placeholder">Loading monitors...</p>
+            </div>
+        </div>
+
+        <div id="detailsView" class="hidden">
+        </div>
+    </div>
+
+    <div id="addApiModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2 id="modalTitle">Add New API to Monitor</h2>
+            <form id="addApiForm">
+                <input type="hidden" id="apiEditId">
+                <input type="url" id="apiUrl" placeholder="https://api.example.com/v1/status" required>
+                <input type="text" id="apiCategory" placeholder="Category (e.g., Payment APIs)">
+                <input type="text" id="apiHeaderName" placeholder="Header Name (Optional)">
+                <input type="text" id="apiHeaderValue" placeholder="Header Value (Optional)">
+                <input type="email" id="apiEmail" placeholder="Notification Email (Optional)">
+                <select id="apiFrequency" required>
+                    <option value="" disabled selected>Select Check Frequency</option>
+                    <option value="60">1 Hour (every 60 minutes)</option>
+                    <option value="30">30 Minutes</option>
+                    <option value="10">10 Minutes</option>
+                    <option value="5">5 Minutes</option>
+                    <option value="2">2 Minutes</option>
+                    <option value="1">1 Minute</option>
+                    <option value="0.5" data-premium="true">30 Seconds (Subscriber)</option>
+                    <option value="0.167" data-premium="true">10 Seconds (Subscriber)</option>
+                    <option value="0.0833" data-premium="true">5 Seconds (Subscriber)</option>
+                    <option value="0.0167" data-premium="true">1 Second (Subscriber)</option>
+                </select>
+                <div class="modal-actions">
+                    <button type="button" id="cancelBtn" class="button-secondary">Cancel</button>
+                    <button type="submit" id="modalSubmitBtn" class="button-primary">Add Monitor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="reportModal" class="modal-overlay hidden">
+        <div class="modal-content large" id="reportModalContent">
+        </div>
+    </div>
+
+    <!-- AI Insights Modal -->
+    <div id="aiInsightsModal" class="modal-overlay hidden">
+        <div class="modal-content large ai-modal">
+            <div class="modal-header">
+                <h2><i class="ri-robot-line"></i> AI Insights & Predictions</h2>
+                <button id="closeAiModal" class="button-icon">✕</button>
+            </div>
+            <div id="aiInsightsContent" class="ai-insights-content">
+                <p class="placeholder">Loading AI predictions...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Training History Modal -->
+    <div id="trainingHistoryModal" class="modal-overlay hidden">
+        <div class="modal-content large ai-modal">
+            <div class="modal-header">
+                <h2><i class="ri-history-line"></i> AI Training History</h2>
+                <button id="closeTrainingHistory" class="button-icon">✕</button>
+            </div>
+            <div id="trainingHistoryContent" class="ai-insights-content">
+                <p class="placeholder">Loading training history...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub Token Help Modal -->
+    <div id="tokenHelpModal" class="modal-overlay hidden">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2><i class="ri-key-line"></i> How to Get GitHub Personal Access Token</h2>
+                <button id="closeTokenHelp" class="button-icon">✕</button>
+            </div>
+            <div style="padding: 1.5rem; color: #C9D1D9;">
+                <h3 style="color: #58A6FF; margin-top: 0;">Step-by-Step Guide:</h3>
+
+                <div style="background: #161B22; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                    <p style="margin: 0.5rem 0;"><strong>1.</strong> Go to GitHub Settings</p>
+                    <p style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        Visit: <a href="https://github.com/settings/tokens" target="_blank"
+                            style="color: #58A6FF;">https://github.com/settings/tokens</a>
+                    </p>
+                </div>
+
+                <div style="background: #161B22; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                    <p style="margin: 0.5rem 0;"><strong>2.</strong> Generate New Token</p>
+                    <p style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        Click <strong>"Generate new token"</strong> → Select <strong>"Generate new token
+                            (classic)"</strong>
+                    </p>
+                </div>
+
+                <div style="background: #161B22; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                    <p style="margin: 0.5rem 0;"><strong>3.</strong> Configure Token</p>
+                    <p style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <strong>Note:</strong> API Monitoring Token<br>
+                        <strong>Expiration:</strong> 90 days (or custom)<br>
+                        <strong>Scopes:</strong> Check these boxes:
+                    </p>
+                    <ul style="padding-left: 3rem; margin: 0.5rem 0;">
+                        <li>✅ <strong>repo</strong> (Full control of private repositories)</li>
+                        <li><i class="ri-checkbox-circle-line" style="color: var(--secondary);"></i>
+                            <strong>read:org</strong> (Read org and team membership)
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="background: #161B22; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                    <p style="margin: 0.5rem 0;"><strong>4.</strong> Generate & Copy</p>
+                    <p style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        Click <strong>"Generate token"</strong> at the bottom<br>
+                        <i class="ri-error-warning-line" style="color: var(--danger);"></i> <strong>IMPORTANT:</strong>
+                        Copy the token immediately! You won't see it again.
+                    </p>
+                </div>
+
+                <div style="background: #161B22; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                    <p style="margin: 0.5rem 0;"><strong>5.</strong> Paste Token Here</p>
+                    <p style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        Paste the token in the <strong>"GitHub Personal Access Token"</strong> field above<br>
+                        Your token will be securely stored in MongoDB
+                    </p>
+                </div>
+
+                <div style="background: #1F6FEB; padding: 1rem; border-radius: 6px; margin: 1.5rem 0;">
+                    <p style="margin: 0; font-weight: bold;"><i class="ri-lightbulb-line"></i> Pro Tip:</p>
+                    <p style="margin: 0.5rem 0 0 0;">
+                        Token format looks like: <code
+                            style="background: #0D1117; padding: 2px 6px; border-radius: 3px;">ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</code>
+                    </p>
+                </div>
+
+                <div style="background: #DA3633; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                    <p style="margin: 0; font-weight: bold;"><i class="ri-lock-line"></i> Security Note:</p>
+                    <p style="margin: 0.5rem 0 0 0;">
+                        Never share your token publicly! It's stored securely in your database and masked in the UI.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tooltip" class="tooltip hidden"></div>
+
+    <!-- Alert Preview Modal -->
+    <div id="alertPreviewModal" class="modal-overlay hidden" role="dialog" aria-modal="true"
+        aria-labelledby="alertPreviewTitle">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2 id="alertPreviewTitle"><i class="ri-megaphone-line"></i> Community Alert Preview</h2>
+                <button id="closeAlertPreview" class="button-icon" type="button" title="Close alert preview"
+                    aria-label="Close alert preview">✕</button>
+            </div>
+            <div class="preview-tabs">
+                <button class="preview-tab active" data-tab="whatsapp">WhatsApp</button>
+                <button class="preview-tab" data-tab="sms">SMS</button>
+                <button class="preview-tab" data-tab="ivr">IVR Script</button>
+            </div>
+            <div id="previewContent" class="preview-content">
+                <p class="placeholder">Select a tab to see alert copy.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Worker Responses Modal -->
+    <div id="workerResponsesModal" class="modal-overlay hidden" role="dialog" aria-modal="true"
+        aria-labelledby="workerResponsesTitle">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2 id="workerResponsesTitle"><i class="ri-group-line"></i> Worker Responses</h2>
+                <button id="closeWorkerResponses" class="button-icon" type="button" title="Close worker responses"
+                    aria-label="Close worker responses">✕</button>
+            </div>
+            <div class="worker-table-wrapper">
+                <table class="worker-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Channel</th>
+                            <th>Response</th>
+                            <th>API</th>
+                            <th>Timestamp</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="workerResponsesBody"></tbody>
+                </table>
+            </div>
+            <button id="viewFullTimeline" class="button-primary">View Full Incident Timeline</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static_advanced/monitor.js"></script>
+</body>
+
+</html>

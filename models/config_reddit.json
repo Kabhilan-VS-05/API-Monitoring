@@ -1,0 +1,1 @@
+{"category": "reddit", "sequence_length": 20, "n_features": 10, "accuracy": 0.4000000059604645, "auc": 0.0, "trained": true, "ml_ready": true, "last_trained": "2026-02-23T08:31:59.733082", "anomaly_threshold": 0.9335927248001098}

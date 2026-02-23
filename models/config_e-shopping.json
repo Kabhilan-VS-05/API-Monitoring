@@ -1,0 +1,1 @@
+{"category": "E-shopping", "sequence_length": 20, "n_features": 10, "trained": false, "ml_ready": false, "fallback": "statistical", "reason": "Insufficient balanced data for neural training (samples=33, classes=1). Falling back to statistical prediction.", "last_trained": "2026-02-23T09:32:22.343075", "samples": 33, "class_distribution": {"up": 33, "down": 0}}

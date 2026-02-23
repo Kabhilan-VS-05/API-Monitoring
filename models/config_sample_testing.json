@@ -1,0 +1,1 @@
+{"category": "Sample Testing", "sequence_length": 20, "n_features": 10, "accuracy": 0.9736841917037964, "auc": 0.28828829526901245, "trained": true, "ml_ready": true, "last_trained": "2026-02-23T09:33:09.192497", "anomaly_threshold": 1.3543495655059814}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Co-Pilot | Intelligent Monitor</title>
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" />
+  <link rel="stylesheet" href="/static/style_pro.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <div class="dashboard-grid">
+    <!-- HEADER SECTION -->
+    <header class="panel-header">
+      <div class="header-brand">
+        <h1>API MONITOR</h1>
+        <div class="subtitle">
+          <i class="ri-shield-check-fill"></i> Professional Network Oversight
+        </div>
+      </div>
+
+      <div class="control-bar">
+        <div class="input-wrapper">
+          <i class="ri-link"></i>
+          <input type="url" id="urlInput" placeholder="Enter API endpoint URL..." />
+        </div>
+        <div class="input-wrapper opt" style="flex: 0.6;">
+          <i class="ri-key-2-line"></i>
+          <input type="text" id="headerNameInput" placeholder="Header (e.g. Auth)" />
+        </div>
+        <div class="input-wrapper opt" style="flex: 0.6;">
+          <i class="ri-lock-password-line"></i>
+          <input type="text" id="headerValueInput" placeholder="Value" />
+        </div>
+
+        <button id="checkButton" class="btn-scan">
+          <i class="ri-flashlight-fill"></i> <span>SCAN</span>
+        </button>
+
+        <a href="/advanced_monitor" class="btn-advanced" title="Advanced AI Enterprise Dashboard">
+          <i class="ri-shield-user-fill"></i>
+          <span>ADVANCED</span>
+        </a>
+
+        <button id="themeToggle" class="dark-mode-toggle" aria-label="Toggle Theme">
+          <i class="ri-moon-line"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <aside class="panel panel-sidebar">
+      <div class="panel-title"><i class="ri-broadcast-line"></i> LIVE TARGETS</div>
+      <div id="urls-list" class="urls-list" style="overflow-y: auto; height: 100%;">
+        <!-- Populated by JS -->
+        <p style="color: var(--text-dim); font-size: 0.9rem; font-style: italic; text-align: center; margin-top: 2rem;">
+          No specific targets tracked yet.
+        </p>
+      </div>
+      <div id="urls-pagination" class="pagination-controls"
+        style="margin-top: 1rem; display: flex; justify-content: center; gap: 0.5rem;"></div>
+    </aside>
+
+    <!-- MAIN HUD -->
+    <main class="panel-main">
+      <div id="resultHud" class="hud-result" style="display: none;">
+        <div id="result"></div>
+
+        <div id="moreDetails" class="details-expanded" style="display: none;">
+          <div class="detail-grid-mini">
+            <div class="detail-section">
+              <h3><i class="ri-information-line"></i> Response Details</h3>
+              <div id="detailContent"></div>
+            </div>
+            <div id="certSection" class="detail-section">
+              <h3><i class="ri-shield-keyhole-line"></i> Security & Certificate</h3>
+              <div id="certContent"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hud-actions">
+          <button id="showMoreBtn" class="btn-show-more">
+            <i class="ri-arrow-down-s-line"></i>
+            <span>SHOW MORE</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="chart-box">
+        <div class="panel-title"><i class="ri-line-chart-line"></i> Latency Intelligence</div>
+        <canvas id="latencyChart"></canvas>
+      </div>
+    </main>
+
+    <!-- LOGS PANEL -->
+    <section class="panel panel-logs">
+      <div class="panel-title">
+        <i class="ri-terminal-box-line"></i> Real-time Logs
+        <div id="logs-pagination" class="pagination-mini"></div>
+      </div>
+      <div class="log-container">
+        <table style="width: 100%; border-collapse: collapse;">
+          <tbody id="logs-body">
+            <!-- Logs will appear here -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div> <!-- End Dashboard Grid -->
+
+  <script src="/static/script.js"></script>
+</body>
+
+</html>
