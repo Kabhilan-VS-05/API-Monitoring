@@ -1,0 +1,260 @@
+========================================
+GITHUB SETUP - QUICK COMMANDS
+========================================
+
+📋 COPY-PASTE THESE COMMANDS IN ORDER
+========================================
+
+STEP 1: Create Repository on GitHub Website
+--------------------------------------------
+1. Go to: https://github.com/new
+2. Repository name: ai-copilot-api-monitoring
+3. Description: AI-driven predictive API monitoring and developer insights system
+4. Choose: Public
+5. DO NOT check "Initialize with README"
+6. Click "Create repository"
+7. Copy your repository URL (shown on next page)
+
+
+STEP 2: Connect Local to GitHub
+--------------------------------------------
+⚠️ REPLACE "YOUR_USERNAME" with your actual GitHub username!
+
+git remote add origin https://github.com/YOUR_USERNAME/ai-copilot-api-monitoring.git
+git branch -M main
+git push -u origin main
+
+
+STEP 3: Verify
+--------------------------------------------
+Go to: https://github.com/YOUR_USERNAME/ai-copilot-api-monitoring
+You should see all your files!
+
+
+========================================
+DAILY WORKFLOW COMMANDS
+========================================
+
+Check Status:
+--------------------------------------------
+git status
+
+
+Add All Changes:
+--------------------------------------------
+git add .
+
+
+Commit Changes:
+--------------------------------------------
+git commit -m "Your descriptive message here"
+
+
+Push to GitHub:
+--------------------------------------------
+git push
+
+
+Pull Latest Changes:
+--------------------------------------------
+git pull
+
+
+========================================
+USEFUL COMMANDS
+========================================
+
+View Commit History:
+--------------------------------------------
+git log --oneline -10
+
+
+Create New Branch:
+--------------------------------------------
+git checkout -b feature-name
+
+
+Switch Branch:
+--------------------------------------------
+git checkout main
+
+
+Merge Branch:
+--------------------------------------------
+git checkout main
+git merge feature-name
+
+
+Undo Last Commit (keep changes):
+--------------------------------------------
+git reset --soft HEAD~1
+
+
+Undo Last Commit (discard changes):
+--------------------------------------------
+git reset --hard HEAD~1
+
+
+View Remote URL:
+--------------------------------------------
+git remote -v
+
+
+Change Remote URL:
+--------------------------------------------
+git remote set-url origin https://github.com/YOUR_USERNAME/ai-copilot-api-monitoring.git
+
+
+========================================
+COMMIT MESSAGE EXAMPLES
+========================================
+
+✅ GOOD:
+- "Add: Real-time anomaly detection feature"
+- "Fix: MongoDB connection timeout issue"
+- "Update: Improved AI prediction accuracy to 92%"
+- "Refactor: Simplified GitHub integration code"
+- "Docs: Added API endpoint documentation"
+
+❌ BAD:
+- "fixed stuff"
+- "update"
+- "changes"
+- "asdf"
+
+
+========================================
+GITHUB PERSONAL ACCESS TOKEN
+========================================
+
+If GitHub asks for password when pushing:
+
+1. Go to: https://github.com/settings/tokens
+2. Click "Generate new token (classic)"
+3. Name: "API Monitoring Project"
+4. Expiration: 90 days (or custom)
+5. Scopes: Check "repo" (full control)
+6. Click "Generate token"
+7. COPY THE TOKEN (you won't see it again!)
+8. Use token as password when git asks
+
+
+========================================
+TROUBLESHOOTING
+========================================
+
+Error: "Permission denied"
+--------------------------------------------
+Solution: Use HTTPS URL instead of SSH
+git remote set-url origin https://github.com/YOUR_USERNAME/ai-copilot-api-monitoring.git
+
+
+Error: "Repository not found"
+--------------------------------------------
+Solution: Check if repository exists and URL is correct
+git remote -v
+
+
+Error: "Updates were rejected"
+--------------------------------------------
+Solution: Pull first, then push
+git pull origin main --rebase
+git push origin main
+
+
+Error: "fatal: not a git repository"
+--------------------------------------------
+Solution: Initialize git
+git init
+
+
+========================================
+QUICK REFERENCE
+========================================
+
+Your Repository URL:
+https://github.com/YOUR_USERNAME/ai-copilot-api-monitoring
+
+Your Profile:
+https://github.com/YOUR_USERNAME
+
+GitHub Desktop (GUI):
+https://desktop.github.com/
+
+GitHub CLI:
+https://cli.github.com/
+
+
+========================================
+NEXT STEPS AFTER SETUP
+========================================
+
+1. Add repository topics/tags:
+   - Go to repository page
+   - Click "Add topics"
+   - Add: python, flask, machine-learning, api-monitoring, ai, mongodb
+
+2. Pin repository to profile:
+   - Go to your profile
+   - Click "Customize your pins"
+   - Select this repository
+
+3. Add repository description:
+   - Click "About" gear icon
+   - Add description and website
+
+4. Enable GitHub Pages (optional):
+   - Settings → Pages
+   - Source: main branch
+   - Folder: /docs
+
+
+========================================
+COLLABORATION COMMANDS
+========================================
+
+Clone Repository (for teammates):
+--------------------------------------------
+git clone https://github.com/YOUR_USERNAME/ai-copilot-api-monitoring.git
+
+
+Fork Repository (for contributors):
+--------------------------------------------
+1. Click "Fork" button on GitHub
+2. Clone your fork
+3. Make changes
+4. Create Pull Request
+
+
+Add Collaborator:
+--------------------------------------------
+1. Repository → Settings → Collaborators
+2. Click "Add people"
+3. Enter GitHub username
+
+
+========================================
+BACKUP COMMANDS
+========================================
+
+Create Backup Branch:
+--------------------------------------------
+git checkout -b backup-$(date +%Y%m%d)
+git push origin backup-$(date +%Y%m%d)
+
+
+Download Repository as ZIP:
+--------------------------------------------
+Go to: https://github.com/YOUR_USERNAME/ai-copilot-api-monitoring
+Click: Code → Download ZIP
+
+
+========================================
+DONE! 🎉
+========================================
+
+Your project is now on GitHub!
+Share it with the world:
+https://github.com/YOUR_USERNAME/ai-copilot-api-monitoring
+
+========================================

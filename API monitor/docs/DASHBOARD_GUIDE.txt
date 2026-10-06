@@ -1,0 +1,159 @@
+========================================
+DASHBOARD UI - COMPLETE GUIDE
+========================================
+
+✅ WHAT'S NEW IN THE DASHBOARD:
+
+1. NEW "⚙️ Settings" BUTTON
+   - Click to open Developer Data Integration panel
+   - All GitHub sync controls in one place
+
+2. GITHUB SYNC SECTION
+   - Repository Owner input
+   - Repository Name input
+   - Days to fetch (default: 90)
+   - One-click "Sync GitHub Data" button
+   - Real-time status messages
+
+3. DATA SUMMARY CARDS
+   - Commits count (last 7 days)
+   - Issues count (all)
+   - Incidents count (all)
+   - Error Logs count (last 24h)
+
+4. RECENT COMMITS LIST (NEW!)
+   Shows for each commit:
+   - Commit message
+   - Author name
+   - Time ago (e.g., "2 days ago")
+   - Commit ID (short)
+   - Files changed (up to 5 files shown)
+
+5. OPEN ISSUES LIST (NEW!)
+   Shows for each issue:
+   - Issue number and title
+   - Status badge (open/closed)
+   - Priority badge (if set)
+   - Labels
+   - Description preview
+   - Time created
+
+6. RECENT INCIDENTS LIST (NEW!)
+   Shows for each incident:
+   - Incident title
+   - Severity badge (low/medium/high/critical)
+   - Incident ID
+   - Time created
+   - Created by
+   - Summary
+   - Root cause
+   - Fix applied
+
+7. CREATE INCIDENT FORM
+   - Title input
+   - Summary textarea
+   - Severity dropdown
+   - Root cause input
+   - Fix applied input
+   - Create button
+
+========================================
+HOW TO USE:
+========================================
+
+STEP 1: Start the app
+   > START_HERE.bat
+
+STEP 2: Open dashboard
+   > http://localhost:5000/advanced_monitor
+
+STEP 3: Click "⚙️ Settings" button
+   - Panel slides open
+
+STEP 4: Sync GitHub data
+   - Verify repo details (pre-filled)
+   - Click "🔄 Sync GitHub Data"
+   - Watch status message
+   - See counts update
+
+STEP 5: View synced data
+   - Scroll down to see:
+     * Recent Commits (with files changed)
+     * Open Issues (with descriptions)
+     * Recent Incidents (with details)
+
+STEP 6: Create an incident
+   - Fill in the form at bottom
+   - Click "Create Incident"
+   - See it appear in incidents list
+
+========================================
+WHAT YOU'LL SEE:
+========================================
+
+COMMITS DISPLAY:
+┌─────────────────────────────────────┐
+│ Add initial requirements for Flask  │
+│ 👤 Kabhilan-VS-05                   │
+│ 🕒 2 days ago                        │
+│ 📝 abc1234                           │
+│ [requirements.txt] [app.py]         │
+└─────────────────────────────────────┘
+
+ISSUES DISPLAY:
+┌─────────────────────────────────────┐
+│ #42: Payment API timeout    [OPEN]  │
+│ 🕒 1 week ago                        │
+│ 🏷️ bug, high-priority               │
+│ Users experiencing 5-second delays  │
+└─────────────────────────────────────┘
+
+INCIDENTS DISPLAY:
+┌─────────────────────────────────────┐
+│ Test Incident - API Timeout  [HIGH] │
+│ 🆔 INC-1761892364                   │
+│ 🕒 30 minutes ago                    │
+│ 👤 Kabhilan                          │
+│ Payment API experienced timeout...  │
+│ Root Cause: DB connection pool...   │
+│ Fix: Increased connection pool...   │
+└─────────────────────────────────────┘
+
+========================================
+FEATURES:
+========================================
+
+✅ Real-time sync
+✅ Beautiful card layout
+✅ Color-coded badges
+✅ Time ago formatting
+✅ Scrollable lists (max 10 items)
+✅ Hover effects
+✅ Responsive design
+✅ Light/Dark theme support
+✅ Auto-refresh on sync
+✅ No page reload needed
+
+========================================
+KEYBOARD SHORTCUTS:
+========================================
+
+None yet - all click-based!
+
+========================================
+TROUBLESHOOTING:
+========================================
+
+Q: Panel doesn't open?
+A: Refresh page (Ctrl+R)
+
+Q: No data showing?
+A: Click "Sync GitHub Data" first
+
+Q: Sync fails?
+A: Check GITHUB_TOKEN is set
+
+Q: Counts show 0?
+A: Your repo might be empty or private
+
+========================================

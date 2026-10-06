@@ -1,0 +1,262 @@
+╔════════════════════════════════════════════════════════════════╗
+║         API MONITORING SYSTEM - QUICK REFERENCE               ║
+╚════════════════════════════════════════════════════════════════╝
+
+┌────────────────────────────────────────────────────────────────┐
+│ 🚀 QUICK START                                                 │
+└────────────────────────────────────────────────────────────────┘
+
+1. START_HERE.bat                    → Start everything
+2. http://localhost:5000             → Simple interface
+3. http://localhost:5000/advanced_monitor → Advanced dashboard
+
+┌────────────────────────────────────────────────────────────────┐
+│ 📁 KEY FILES                                                   │
+└────────────────────────────────────────────────────────────────┘
+
+app.py                  → Main Flask application
+ai_predictor.py         → AI/ML prediction engine
+github_integration.py   → GitHub sync
+static_advanced/        → Dashboard UI
+requirements.txt        → Dependencies
+
+┌────────────────────────────────────────────────────────────────┐
+│ 🎯 MAIN FEATURES                                               │
+└────────────────────────────────────────────────────────────────┘
+
+[Add New Monitor]       → Monitor any API
+[🤖 AI Insights]        → See predictions
+[⚙️ Settings]           → GitHub sync & incidents
+[🌙/☀️]                 → Toggle theme
+
+┌────────────────────────────────────────────────────────────────┐
+│ 🔌 API ENDPOINTS                                               │
+└────────────────────────────────────────────────────────────────┘
+
+MONITORING:
+  GET  /api/advanced/monitors
+  POST /api/advanced/monitors
+  GET  /api/advanced/history?id=<id>
+
+DEVELOPER DATA:
+  POST /api/sync/github
+  GET  /api/commits?hours=168
+  GET  /api/issues
+  POST /api/incidents
+
+AI/ML:
+  GET  /api/ai/predict/<api_id>
+  GET  /api/ai/anomalies/<api_id>
+  GET  /api/ai/insights/<api_id>
+
+┌────────────────────────────────────────────────────────────────┐
+│ 🧪 TESTING                                                     │
+└────────────────────────────────────────────────────────────────┘
+
+python test_integration.py    → Test GitHub sync
+python test_ai.py              → Test AI predictions
+python test_sync.py            → Test data sync
+RUN_TESTS.bat                  → Run all tests
+
+TEST API:
+  cd "running API"
+  python api_testing.py        → Starts on port 7000
+  Add to monitoring: http://localhost:7000/health
+
+┌────────────────────────────────────────────────────────────────┐
+│ 🎨 UI COMPONENTS                                               │
+└────────────────────────────────────────────────────────────────┘
+
+Monitor Cards:
+  ├─ URL & Category
+  ├─ Sparkline (last 15 checks)
+  ├─ Uptime % (24h)
+  ├─ Average Latency
+  ├─ Status Badge
+  └─ [🤖 AI Insights] button
+
+AI Modal:
+  ├─ Prediction Card (gradient)
+  ├─ Risk Meter (0-100)
+  ├─ Confidence %
+  ├─ Insights Cards
+  └─ Anomaly Alerts
+
+Settings Panel:
+  ├─ GitHub Sync Form
+  ├─ Data Summary Cards
+  ├─ Recent Commits List
+  ├─ Open Issues List
+  ├─ Recent Incidents List
+  └─ Create Incident Form
+
+┌────────────────────────────────────────────────────────────────┐
+│ 🧠 AI RISK SCORING                                             │
+└────────────────────────────────────────────────────────────────┘
+
+Risk Factors:
+  • Failure Rate      → 0-30 points
+  • Latency Trend     → 0-25 points
+  • High Latency      → 0-20 points
+  • Error Count       → 0-15 points
+  • Code Changes      → 0-10 points
+  ─────────────────────────────────
+  TOTAL RISK SCORE    → 0-100
+
+Risk Levels:
+  0-40   → ✅ Low Risk (Safe)
+  41-70  → ⚡ Moderate Risk (Monitor)
+  71-100 → ⚠️ High Risk (Action Needed)
+
+┌────────────────────────────────────────────────────────────────┐
+│ 🗄️ MONGODB COLLECTIONS                                        │
+└────────────────────────────────────────────────────────────────┘
+
+1. monitored_apis          → API configurations
+2. monitoring_logs         → Check results
+3. simple_logs             → One-time checks
+4. git_commits             → GitHub commits
+5. issues                  → GitHub issues
+6. incident_reports        → Incidents
+7. application_logs        → Error logs
+8. data_correlations       → Links everything
+
+┌────────────────────────────────────────────────────────────────┐
+│ 🔧 TROUBLESHOOTING                                             │
+└────────────────────────────────────────────────────────────────┘
+
+MongoDB not connected:
+  → net start MongoDB
+
+Port 5000 in use:
+  → Change port in app.py: app.run(port=5001)
+
+GitHub sync fails:
+  → Check GITHUB_TOKEN is set
+  → Verify token has repo access
+
+AI shows "Insufficient data":
+  → Wait for 5+ monitoring checks
+  → Check MongoDB has data
+
+NumPy not found:
+  → pip install numpy==1.24.3
+
+┌────────────────────────────────────────────────────────────────┐
+│ ⌨️ KEYBOARD SHORTCUTS                                          │
+└────────────────────────────────────────────────────────────────┘
+
+ESC              → Close modals
+Click outside    → Close modals
+F5               → Refresh page
+Ctrl+R           → Refresh page
+
+┌────────────────────────────────────────────────────────────────┐
+│ 📊 MONITORING FREQUENCIES                                      │
+└────────────────────────────────────────────────────────────────┘
+
+High    → 1 minute   (critical APIs)
+Fast    → 5 minutes  (important APIs)
+Medium  → 10 minutes (normal APIs)
+Low     → 30 minutes (background checks)
+
+┌────────────────────────────────────────────────────────────────┐
+│ 🎯 COMMON WORKFLOWS                                            │
+└────────────────────────────────────────────────────────────────┘
+
+ADD NEW API:
+  1. Click "Add New Monitor"
+  2. Enter URL
+  3. Choose frequency
+  4. Add category (optional)
+  5. Click "Add Monitor"
+
+CHECK AI PREDICTION:
+  1. Find monitor card
+  2. Click "🤖 AI Insights"
+  3. View risk score
+  4. Read recommendations
+  5. Close modal
+
+SYNC GITHUB DATA:
+  1. Click "⚙️ Settings"
+  2. Enter repo details
+  3. Click "Sync GitHub Data"
+  4. Wait for success message
+  5. Scroll to see data
+
+CREATE INCIDENT:
+  1. Click "⚙️ Settings"
+  2. Scroll to "Create Incident"
+  3. Fill in details
+  4. Choose severity
+  5. Click "Create Incident"
+
+┌────────────────────────────────────────────────────────────────┐
+│ 📈 PERFORMANCE TIPS                                            │
+└────────────────────────────────────────────────────────────────┘
+
+• Use appropriate check frequencies
+• Archive old logs periodically
+• Index MongoDB collections
+• Limit history queries
+• Use caching for static data
+
+┌────────────────────────────────────────────────────────────────┐
+│ 🔐 SECURITY NOTES                                              │
+└────────────────────────────────────────────────────────────────┘
+
+• Keep GitHub token secret
+• Use environment variables
+• Don't commit tokens to git
+• Rotate tokens regularly
+• Use read-only tokens when possible
+
+┌────────────────────────────────────────────────────────────────┐
+│ 📚 DOCUMENTATION FILES                                         │
+└────────────────────────────────────────────────────────────────┘
+
+README.md              → Main documentation
+COMPLETE_GUIDE.md      → Full guide
+DEMO_SCRIPT.md         → Demo instructions
+PROJECT_SUMMARY.md     → Project overview
+AI_FEATURES_SUMMARY.txt → AI details
+DASHBOARD_GUIDE.txt    → UI guide
+QUICK_REFERENCE.txt    → This file
+
+┌────────────────────────────────────────────────────────────────┐
+│ 🆘 SUPPORT                                                     │
+└────────────────────────────────────────────────────────────────┘
+
+GitHub: https://github.com/Kabhilan-VS-05/API-Monitoring
+Issues: Report bugs on GitHub
+Docs: See documentation files above
+
+┌────────────────────────────────────────────────────────────────┐
+│ ✅ CHECKLIST FOR NEW USERS                                     │
+└────────────────────────────────────────────────────────────────┘
+
+□ MongoDB installed and running
+□ Python 3.8+ installed
+□ Dependencies installed (pip install -r requirements.txt)
+□ GitHub token set (optional)
+□ Application started (START_HERE.bat)
+□ Dashboard opened (http://localhost:5000/advanced_monitor)
+□ First API added
+□ AI insights tested
+□ GitHub data synced
+□ Test incident created
+
+┌────────────────────────────────────────────────────────────────┐
+│ 🎉 QUICK WINS                                                  │
+└────────────────────────────────────────────────────────────────┘
+
+5 minutes:  Add your first API
+10 minutes: See AI predictions
+15 minutes: Sync GitHub data
+20 minutes: Create an incident
+30 minutes: Understand full system
+
+╔════════════════════════════════════════════════════════════════╗
+║  Need help? Check COMPLETE_GUIDE.md for detailed instructions ║
+╚════════════════════════════════════════════════════════════════╝

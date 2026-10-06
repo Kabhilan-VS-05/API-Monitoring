@@ -1,0 +1,186 @@
+========================================
+PROJECT STRUCTURE
+========================================
+
+API Downtime/
+│
+├── 📄 README.txt              → Quick start guide
+├── 🚀 START_HERE.bat          → Start application
+├── 🧪 RUN_TESTS.bat           → Run all tests
+├── 📋 requirements.txt        → Python dependencies
+│
+├── 🐍 Core Python Files
+│   ├── app.py                 → Main Flask application
+│   ├── ai_predictor.py        → AI/ML prediction engine
+│   ├── github_integration.py  → GitHub API sync
+│   ├── issue_integration.py   → Issue tracking
+│   ├── log_collector.py       → Error logging
+│   └── correlation_engine.py  → Data correlation
+│
+├── 📁 docs/                   → Documentation
+│   ├── QUICK_REFERENCE.txt    → Commands & shortcuts
+│   ├── AI_FEATURES_SUMMARY.txt → AI algorithm details
+│   └── DASHBOARD_GUIDE.txt    → UI walkthrough
+│
+├── 🧪 tests/                  → Test scripts
+│   ├── test_ai.py             → AI prediction tests
+│   ├── test_integration.py    → GitHub sync tests
+│   └── test_sync.py           → Data sync tests
+│
+├── 🎨 static/                 → Simple interface
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+├── 🎨 static_advanced/        → Advanced dashboard
+│   ├── monitor.html           → Main dashboard
+│   ├── monitor.css            → Styles
+│   └── monitor.js             → Logic
+│
+└── 🔧 running API/            → Test APIs
+    └── api_testing.py         → Failing API simulator
+
+========================================
+QUICK COMMANDS
+========================================
+
+Start Application:
+  > START_HERE.bat
+
+Run Tests:
+  > RUN_TESTS.bat
+
+Start Test API:
+  > cd "running API"
+  > python api_testing.py
+
+Access Dashboards:
+  Simple:   http://localhost:5000
+  Advanced: http://localhost:5000/advanced_monitor
+
+========================================
+FILE DESCRIPTIONS
+========================================
+
+CORE FILES:
+  app.py (980 lines)
+    - Flask web server
+    - All API endpoints
+    - Background monitoring thread
+    - MongoDB integration
+
+  ai_predictor.py (400+ lines)
+    - Failure prediction algorithm
+    - Anomaly detection
+    - Pattern recognition
+    - Risk scoring (0-100)
+
+  github_integration.py (200+ lines)
+    - GitHub API client
+    - Commit synchronization
+    - PR fetching
+    - Repository data
+
+  issue_integration.py (150+ lines)
+    - Issue tracking
+    - GitHub issue sync
+    - Issue management
+
+  log_collector.py (200+ lines)
+    - Error logging
+    - MongoDB log handler
+    - Log queries
+
+  correlation_engine.py (250+ lines)
+    - Data correlation
+    - Link failures to commits
+    - Pattern matching
+
+FRONTEND:
+  static_advanced/monitor.html
+    - Main dashboard UI
+    - Monitor cards
+    - AI insights modal
+    - Settings panel
+
+  static_advanced/monitor.css (660+ lines)
+    - Modern styling
+    - Dark/Light themes
+    - Responsive design
+    - Animations
+
+  static_advanced/monitor.js (964+ lines)
+    - Dashboard logic
+    - Chart rendering
+    - API calls
+    - UI interactions
+
+DOCUMENTATION:
+  docs/QUICK_REFERENCE.txt
+    - Commands
+    - Shortcuts
+    - Common workflows
+    - Troubleshooting
+
+  docs/AI_FEATURES_SUMMARY.txt
+    - AI algorithms explained
+    - Risk scoring details
+    - Anomaly detection
+    - Technical details
+
+  docs/DASHBOARD_GUIDE.txt
+    - UI walkthrough
+    - Feature guide
+    - Screenshots (text)
+    - Usage tips
+
+TESTS:
+  tests/test_ai.py
+    - Test AI predictions
+    - Test anomaly detection
+    - Test insights generation
+
+  tests/test_integration.py
+    - Test GitHub sync
+    - Test issue sync
+    - Test API endpoints
+
+  tests/test_sync.py
+    - Test data synchronization
+    - Test correlation
+
+========================================
+MONGODB COLLECTIONS
+========================================
+
+1. monitored_apis       → API configurations
+2. monitoring_logs      → Check results
+3. simple_logs          → One-time checks
+4. git_commits          → GitHub commits
+5. issues               → GitHub issues
+6. incident_reports     → Incidents
+7. application_logs     → Error logs
+8. data_correlations    → Data links
+
+========================================
+DEPENDENCIES
+========================================
+
+Flask==3.0.0           → Web framework
+flask-cors==4.0.0      → CORS support
+pycurl==7.45.3         → HTTP client
+cryptography==41.0.7   → TLS handling
+idna==3.6              → Domain handling
+pymongo==4.6.1         → MongoDB driver
+numpy==1.24.3          → AI calculations
+requests==2.31.0       → HTTP library
+
+========================================
+PORTS
+========================================
+
+5000 → Main application
+7000 → Test API (api_testing.py)
+27017 → MongoDB
+
+========================================
